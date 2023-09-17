@@ -1,3 +1,10 @@
+
 module.exports.home = (req , res)=>{
- res.send("connected to controler");
+    res.render('home' ,
+     {title :" this is Home" ,
+     body :"body ma hu mai"
+       
+    
+    
+    } );
 };
