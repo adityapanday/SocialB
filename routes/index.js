@@ -5,7 +5,11 @@ const router = express.Router();
 const homecontroler =require('../controllers/Home_Controler');
 
 router.get('/' , homecontroler.home);
-console.log("inside router");
 
+
+
+
+
+router.use('/users' , require('./users'));
 
 module.exports = router;
