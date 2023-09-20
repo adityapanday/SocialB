@@ -1,20 +1,23 @@
 const express = require ('express');
-const expressEjsLayouts = require('express-ejs-layouts');
-
 const app = express();
-const path = require('path');
+const port = 8000;
+const expressLayouts = require('express-ejs-layouts');
+
+
+// const path = require('path');
 
 // Static files ka lia
 app.use(express.static('./assets'));
 
- const port = 8000;
 
-app.use(expressEjsLayouts);
+ 
+app.use(expressLayouts);
 
 //setup Static files to be accesed at diff places in views
-app.set('layout extract Styles' , true);
-app.set('layout extract Scrypts' , true);
-
+app.set('layout extractStyles' , true);
+ 
+app.set("layout extractScripts", true)
+ 
 
  //setup of view engine
 app.set('view engine' , 'ejs');
