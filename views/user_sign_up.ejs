@@ -1,11 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title><%-title%></title>
 </head>
 <body>
     <h1>sign up</h1>
+
+    <form action="/user/create" method="post">
+
+     <div class="mainBox">
+       <div class="Name">
+        <span>Enter your Name</span>
+        <input type="text" name="Name" placeholder="Name">
+       </div>
+
+
+       <div class="Email">
+        <span>Enter your Email</span>
+        <input type="email" name="Email" placeholder="Email">
+       </div>
+
+
+       <div class="Password">
+        <span>Enter your Password</span>
+        <input type="password" name="password" placeholder="Password">
+        <span>Confirm Password</span>
+        <input type="password" name="ConfirmPassword" placeholder="ConfirmPassword">
+       </div>
+
+     
+     </div>
+     <div><input type="submit" placeholder="submit"></div>
+     <div><input type="reset" placeholder="reset"></div>
+
+
+
+
+    </form>
 </body>
 </html>

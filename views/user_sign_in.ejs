@@ -3,9 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%-title%></title>
+    <title> <%=title%> </title>
 </head>
 <body>
     <h1>sign in</h1>
+
+    <form action="/user/create-Session" method="post">
+
+        <div class="mainBox">
+          
+   
+          <div class="Email">
+           <span>Enter your Email</span>
+           <input type="email" name="Email" placeholder="Email">
+          </div>
+   
+   
+          <div class="Password">
+           <span>Enter your Password</span>
+           <input type="password" name="password" placeholder="Password">
+            
+          </div>
+   
+        
+        </div>
+        <div><input type="submit" placeholder="submit"></div>
+        <div><input type="reset" placeholder="reset"></div>
+   
+   
+   
+   
+       </form>
 </body>
 </html>

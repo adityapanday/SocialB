@@ -13,3 +13,11 @@ module.exports.signup = (req , res)=>{
 module.exports.signin = (req , res)=>{
     res.render('user_sign_in' , {title:"sign in page"});
 };
+
+module.exports.create = (req , res)=>{
+
+};
+
+module.exports.createSession = (req , res)=>{
+
+};

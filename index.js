@@ -1,10 +1,17 @@
 const express = require ('express');
+const cookieparser = require('cookie-parser');
 const app = express();
 const port = 8000;
 const expressLayouts = require('express-ejs-layouts');
 const db = require('./config/mongoose');
 
 // const path = require('path');
+
+app.use(cookieparser());
+
+//form data ka lia
+app.use(express.urlencoded());
+
 
 // Static files ka lia
 app.use(express.static('./assets'));
@@ -14,9 +21,8 @@ app.use(express.static('./assets'));
 app.use(expressLayouts);
 
 //setup Static files to be accesed at diff places in views
-app.set('layout extractStyles' , true);
- 
-app.set("layout extractScripts", true)
+app.set('layout extractStyles' , true); 
+app.set('layout extractScripts', true)
  
 
  //setup of view engine
