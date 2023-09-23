@@ -8,8 +8,12 @@ router.get('/edit' , Users_controler.edit);
 router.get('/signin' , Users_controler.signin);
 router.get('/signup' , Users_controler.signup);
 
+//sigin 
+router.post('/create-Session' , Users_controler.createSession);
 //to create user 
 router.post('/create' , Users_controler.create);
+
+
 
 
 module.exports = router;
