@@ -1,9 +1,33 @@
-module.exports.profile = (req , res)=>{
-  // res.send("profile ma dikkat");
-  return res.render('profile');
+const User = require('../models/user');
+module.exports.profile = async(req , res)=>{
+  //req.cookie.User_id this is checking if user is sign in then only he can open profile
+  //bcoz user id wil be stored in cookie
+  // return res.send(req.cookie);
+
+  try{ if(req.cookie.user_id){
+      const val = await User.findById(req.cookie.user_id);
+      if(val){
+        res.render('profile' , {User:val});
+      }else{
+        return res.redirect('/users/signin');
+      }
+ }else{
+  console.log("try ka andar cookie nahi mile");
+     return res.redirect('/users/signin');
+ }
+}catch{
+  console.log(req.cookie);
+  console.log("error in finding cookie");
+  return res.render('user_sign_in');
+}
+};
+
+// module.exports.profile = (req , res)=>{
+//   // res.send("profile ma dikkat");
+//   return res.render('profile');
   
     
-};
+// };
 
 module.exports.edit = (req , res)=>{
    res.end("user ko edit karna hai ");
@@ -17,7 +41,7 @@ module.exports.signin = (req , res)=>{
 };
 
  
-const User = require('../models/user');
+// const User = require('../models/user');
 
 
 
@@ -40,7 +64,7 @@ module.exports.create = async (req, res) => {
  
 module.exports.createSession = async(req , res)=>{
     try{
-      const val = User.findOne({Emali :req.body.Email});
+      const val =  User.findOne({Emali :req.body.Email});
       if(User){
         if(req.body.Password == val.Password){
             res.cookie('User_id' , User.id);
