@@ -1,26 +1,54 @@
 const User = require('../models/user');
-module.exports.profile = async(req , res)=>{
-  //req.cookie.User_id this is checking if user is sign in then only he can open profile
-  //bcoz user id wil be stored in cookie
-  // return res.send(req.cookie);
+// module.exports.profile = async(req , res)=>{
+//   //req.cookie.User_id this is checking if user is sign in then only he can open profile
+//   //bcoz user id wil be stored in cookie
 
-  try{ if(req.cookie.user_id){
-      const val = await User.findById(req.cookie.user_id);
-      if(val){
-        res.render('profile' , {User:val});
-      }else{
+//   try{ if(req.cookies.user_id){
+//       const val = await User.findById(req.cookies.user_id);
+//       console.log("val ki value"+val );
+//       if(val){
+//         res.render('profile' , {User:val});
+//       }else{
+//         return res.redirect('/users/signin');
+//       }
+//  }else{
+//   return res.send("iii"+req.cookies.user_id);
+//   console.log("try ka andar cookie nahi mile");
+//      return res.redirect('/users/signin');
+//  }
+// }catch(err){
+//   console.log(err);
+//   console.log("error in finding cookie");
+//   return res.render('user_sign_in');
+// }
+// };
+
+
+module.exports.profile = async function (req, res) {
+  try {
+    if (req.cookies.ObjectId) {
+      const user = await User.findById(req.cookies.ObjectId);
+
+      if (user) {
+        return res.render('profile', {
+          title: "User Profile",
+          User: user,
+        });
+      } else {
+        console.log("User not found");
         return res.redirect('/users/signin');
       }
- }else{
-  console.log("try ka andar cookie nahi mile");
-     return res.redirect('/users/signin');
- }
-}catch{
-  console.log(req.cookie);
-  console.log("error in finding cookie");
-  return res.render('user_sign_in');
-}
+    } else {
+      console.log("Cookie not found");
+      return res.redirect('/users/signin');
+    }
+  } catch (error) {
+    console.error(error);
+    console.log("Error in finding user by ID");
+    return res.render('user_sign_in');
+  }
 };
+
 
 // module.exports.profile = (req , res)=>{
 //   // res.send("profile ma dikkat");
