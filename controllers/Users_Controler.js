@@ -17,7 +17,7 @@ module.exports.signin = (req , res)=>{
  
 const User = require('../models/user');
 
-const User = require('../models/user'); // Import your User model
+const User = require('../models/user'); // Import your User model//
 
 module.exports.create = async (req, res) => {
   if (req.body.password !== req.body.ConfirmPassword) {
