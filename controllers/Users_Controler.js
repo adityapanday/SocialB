@@ -26,6 +26,7 @@ const User = require('../models/user');
 
 module.exports.profile = async function (req, res) {
   try {
+    //user_id hoga Object vali jagha
     if (req.cookies.ObjectId) {
       const user = await User.findById(req.cookies.ObjectId);
 
