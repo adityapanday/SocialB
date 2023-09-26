@@ -1,5 +1,7 @@
+const User = require('../models/user');
+const passport = require('passport');
 module.exports.profile = (req , res)=>{
-    res.end("inside the profile of user");
+   return res.render('user');
     
 };
 
@@ -8,26 +10,37 @@ module.exports.edit = (req , res)=>{
 };
 
 module.exports.signup = (req , res)=>{
-    res.render('user_sign_up' , {title:"sign up page"});
+   if(req.isAuthenticated()){
+    return res.redirect('/users/profile')
+   }
+
+
+    return res.render('user_sign_up' , {title:"sign up page"});
 };
 module.exports.signin = (req , res)=>{
-    res.render('user_sign_in' , {title:"sign in page"});
+
+  if(req.isAuthenticated()){
+    return res.redirect('/users/profile')
+   }
+
+   return res.render('user_sign_in' , {title:"sign in page"});
 };
 
  
-const User = require('../models/user');
 
-const User = require('../models/user'); // Import your User model//
+
+ 
 
 module.exports.create = async (req, res) => {
   if (req.body.password !== req.body.ConfirmPassword) {
+    console.log("password not matches")
     return res.redirect('back');
   }
   try {
-    const user = await User.create(req.body);
+    const user1 = await User.create(req.body);
     console.log("User Created");
     // You can add additional logic here if needed
-    return res.redirect('/signin');
+    return res.redirect('/users/signin');
   } catch (err) {
     console.error("Error in storing in the database:", err);
     return res.redirect('back');
@@ -36,5 +49,5 @@ module.exports.create = async (req, res) => {
 
 
 module.exports.createSession = (req , res)=>{
-
+  return res.redirect('/');
 };

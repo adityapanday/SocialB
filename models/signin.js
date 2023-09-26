@@ -1,7 +1,7 @@
 const mongoose = require ('mongoose');
 
 const Signinschema = mongoose.Schema({
-  email:{
+  Email:{
     type:String,
     required:true
   },
