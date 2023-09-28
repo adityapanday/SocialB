@@ -1,6 +1,19 @@
  <link rel="stylesheet" href="/css/header.css">
  <div class="header"> 
-         
+         <% if(locals.user) {%>
+            <ul class="profle">
+                <li> <a href="/users/profile"> <%=user.Name%></a></li>
+                <li><a href="/users/signout"> signout</a></li>
+            </ul>
+
+                <%} else{%>
+
+                    <ul class="mainpage">
+                        <li><a href="/users/signin" >signin</a></li>
+                               
+                        <li><a href="/users/signup" >signup </a></li>
+                    </ul>
+                        <%}%>
                  
         <h1>this is header</h1>
 </div>

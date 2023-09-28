@@ -30,7 +30,7 @@ module.exports.signin = (req , res)=>{
 
 
  
-
+//signup
 module.exports.create = async (req, res) => {
   if (req.body.password !== req.body.ConfirmPassword) {
     console.log("password not matches")
@@ -47,7 +47,33 @@ module.exports.create = async (req, res) => {
   }
 };
 
-
+//login
 module.exports.createSession = (req , res)=>{
   return res.redirect('/');
+};
+
+//this is for logout 
+module.exports.destroy = (req, res) => {
+  // Passport's req.logout() function with a callback
+  req.logout(function (err) {
+      if (err) {
+          // Handle error, if any
+          console.error(err);
+          return res.redirect('/');  
+      }
+     
+      return res.redirect('/users/signin');
+  });
+};
+
+
+const Post = require('../models/post');
+module.exports.post = async(req , res)=>{
+   try {
+    var a = Post.create(req.body);
+    console.log("Posted");
+    return  res.redirect('back');
+   } catch (error) {
+      console.log("Error in Posting " + error);
+   }
 };
