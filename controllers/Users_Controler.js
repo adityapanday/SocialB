@@ -67,13 +67,28 @@ module.exports.destroy = (req, res) => {
 };
 
 
+
+////////////////////////////////////////////////////////posts ////////////////////////////////////////////////////////////////
+
+
 const Post = require('../models/post');
+const { application } = require('express');
 module.exports.post = async(req , res)=>{
-   try {
-    var a = Post.create(req.body);
-    console.log("Posted");
-    return  res.redirect('back');
-   } catch (error) {
-      console.log("Error in Posting " + error);
+  try {
+   var a = Post.create({
+     Content:req.body.Content ,
+      User: req.user._id
+   });
+   if(a){
+     console.log("Posted");
+     return  res.redirect('back');
    }
+   console.log("error in storing post in data base");
+   return res.redirect('back');
+   
+  } catch (error) {
+     console.log("Error in Posting " + error);
+  }
 };
+
+

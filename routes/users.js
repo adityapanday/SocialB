@@ -13,14 +13,19 @@ router.get('/signout' ,Users_controler.destroy);
 
 //to create user 
 router.post('/create' , Users_controler.create);
-//for post
-router.post('/post',passport.checkAuthentication , Users_controler.post);
+
 //yad rakho router takes middle ware too 
 router.post('/create-session', passport.authenticate(
     'local',
     {failureRedirect: '/users/signin'},
 ), Users_controler.createSession);
 
+
+
+
+
+//for post
+router.post('/posts' , passport.checkAuthentication,  Users_controler.post);
 
 
 
