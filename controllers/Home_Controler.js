@@ -13,7 +13,7 @@ module.exports.home = async(req , res)=>{
         return res.render('home', {
             title: "Codeial | Home",
             posts: val,   
-            body1 :"body ma hu mai",
+             
             User:val2for_User
         });
 

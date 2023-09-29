@@ -25,7 +25,7 @@ router.post('/create-session', passport.authenticate(
 
 
 //for post
-router.post('/posts' , passport.checkAuthentication,  Users_controler.post);
+router.post('/posts' , passport.checkAuthentication ,  Users_controler.post);
 
 
 
