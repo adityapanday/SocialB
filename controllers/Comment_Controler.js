@@ -7,7 +7,7 @@ module.exports.create = async(req , res)=>{
         comment : req.body.comment,
         user:req.user._id,
         post:req.body.post
- 
+            
     });
     if(!a){
         console.log("commnt not created........");
