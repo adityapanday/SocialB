@@ -1,51 +1,56 @@
- 
-  
-   <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title><%-title%></title>
-   </head>
-   <body>
-      <div>
-         <h1>Welcome to SocialB</h1>
-      </div>
-      <div>
-         <% if (locals.user) { %>
-            <!-- Post form -->
-            <form action="/users/posts" method="post">
-               <textarea name="Content" cols="30" rows="10" placeholder="Write Post...."></textarea>
-               <input type="submit" value="Click To Post">
-               <input type="reset" value="Delete All">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+</head>
+<body>
+    <div>
+        <h1>Welcome to SocialB</h1>
+    </div>
+    <div>
+        <% if (locals.user) { %>
+        <!-- Post form -->
+        <form action="/users/posts" method="post">
+            <textarea name="Content" cols="30" rows="10" placeholder="Write Post...."></textarea>
+            <input type="submit" value="Click To Post">
+            <input type="reset" value="Delete All">
+        </form>
+        <!-- Comment form -->
+        <% } %>
+    </div>
+    <div>
+        <% if (locals.user) { %>
+        <% for (p of posts) { %>
+        <div>
+            <li>
+                <%= p.Content %>
+            </li>
+            <li>
+                <%= p.User.Name %>
+            </li>
+        </div>
+        <div>
+            <form action="/comment/create" method="post">
+                <input type="text" name="comment" placeholder="Comments">
+                <input type="hidden" name="post" value="<%= p._id %>">
+                <input type="submit" value="Comment">
             </form>
-            <!-- Comment form -->
-           
-         <% } %>
-      </div>
-      <div>
-         <%if(locals.user) { %>
-         <% for (p of posts) { %>
-            <div>
-               <li>
-                  <%= p.Content %>
-               </li>
-               <li>
-                  <%= p.User.Name %>
-               </li>
-              
-            </div>
-            <div>
-              
-               <form action="/comment/create" method="post">
-                  <input type="text" name="comment" placeholder="Comments">
-                  <input type="hidden" name="post" value="<%=p._id%>">
-                  <input type="submit" value="Comment">
-               </form>
-              
-            </div>
-         <% } %>
-         <%}%>
-      </div>
-   </body>
-   
-   
- 
+        </div>
+        <div>
+            <% for (c of p.comments) { %>
+            <p>
+                <%= c.comment %>
+            </p>
+            <br>
+            <small>
+                <%= c.user.Name %>
+            </small>
+            <% } %>
+        </div>
+        <% } %>
+        <% } %>
+    </div>
+</body>
+</html>
