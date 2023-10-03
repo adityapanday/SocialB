@@ -16,7 +16,7 @@ module.exports.create = async(req , res)=>{
     console.log('commet created Sucessfully');
     return res.redirect('back');
    } catch (error) {
-    console.log("commnt not created........in catch" + error);
+    console.log("commnt not created........in catch" + error);    
         return res.redirect('back');
    }
 
