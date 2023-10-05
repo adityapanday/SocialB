@@ -117,7 +117,8 @@ module.exports.destroy2 = async function (req, res) {
     return res.redirect('back');
   }
 };
+                                                                        
+                                                                            
+                                                                                                                                 
 
-
-
-
+                                                     
