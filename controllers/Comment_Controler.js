@@ -29,7 +29,7 @@ try{
       });
       post.comments.push(comment);
        post.save();
-       console.log('commet created Sucessfully' + comment);
+       console.log('commet created Sucessfully' );
       res.redirect('/');
     } 
 }catch (error) {

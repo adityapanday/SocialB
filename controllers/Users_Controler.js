@@ -91,4 +91,35 @@ module.exports.post = async(req , res)=>{
   }
 };
 
+//delete post 
+const Comment = require('../models/comment');
 
+
+module.exports.destroy2 = async function (req, res) {
+  try {
+    const post = await Post.findById(req.params.id);
+
+    if (!post) {
+      console.log('Post not found');
+      return res.redirect('back');
+    }
+
+    if (post.User == req.user.id) {
+      await post.deleteOne();
+      // const co  = await Comment.findByIdAndRemove({post:req.param.id});
+
+      // Todo check Comment reuire kara hai dhayan do 
+
+
+
+
+      await Comment.deleteMany({ post: req.params.id });
+      return res.redirect('back');
+    } else {
+      return res.redirect('back');
+    }
+  } catch (err) {
+    console.error('Error in getting post:', err);
+    return res.redirect('back');
+  }
+};

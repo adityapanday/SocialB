@@ -12,5 +12,6 @@ router.get('/' , homecontroler.home);
 
 router.use('/users' , require('./users'));
 router.use('/comment' , require('./comment'));
+router.use('/post' , require('./post'));
 
 module.exports = router;
