@@ -119,6 +119,3 @@ module.exports.destroy2 = async function (req, res) {
 };
                                                                         
                                                                             
-                                                                                                                                 
-
-                                                     
