@@ -106,10 +106,7 @@ module.exports.destroy2 = async function (req, res) {
 
     if (post.User == req.user.id) {
       await post.deleteOne();
-       
-
-    
-
+  
       await Comment.deleteMany({ post: req.params.id });
       return res.redirect('back');
     } else {
