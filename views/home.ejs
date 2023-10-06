@@ -24,13 +24,9 @@
         <% if (locals.user) { %>
         <% for (p of posts) { %>
         <div>
-            <% if(locals.user && locals.user.id == p.User.id) {%>
-                     
-                <a href="/post/destroy/<%=p.id%>">Delete</a>
-                <%}%>
-
-            
-   
+            <% if (locals.user.id == p.User.id) { %>
+                <a href="/post/destroy/<%= p.id %>">Delete</a>
+            <% } %>
 
             <li>
                 <%= p.Content %>
@@ -52,11 +48,14 @@
             <p>
                 <%= c.comment %>
             </p>
+
+            <% if (locals.user.id == c.user.id) { %>
+                <a href="/comment/destroy/<%= c.id %>">Delete Comment</a>
+            <% } %>
             <br>
             <small>
                 <%= c.user.Name %>
             </small>
-           
             <% } %>
         </div>
         <% } %>

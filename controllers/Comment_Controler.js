@@ -38,3 +38,33 @@ try{
    }
 
 }            
+
+module.exports.destroy = async function (req, res) {
+  try {
+      const comment = await Comment.findById(req.params.id);
+
+      if (!comment) {
+          console.log('Comment not found');
+          return res.redirect('back');
+      }
+
+      
+      if (comment.user.toString() === req.user.id.toString()) {
+          const postId = comment.post;
+
+          await Comment.deleteOne({ _id: req.params.id });
+
+          
+          await Post.findByIdAndUpdate(postId, { $pull: { comments: req.params.id } });
+
+          console.log('Comment deleted successfully');
+          return res.redirect('back');
+      } else {
+          console.log('Unauthorized to delete this comment');
+          return res.redirect('back');
+      }
+  } catch (err) {
+      console.error('Error in deleting comment:', err);
+      return res.redirect('back');
+  }
+};
