@@ -1,0 +1,13 @@
+<link rel="stylesheet" href="/css/post.css">
+
+<li>
+    <% if (locals.user.id == p.User.id) { %>
+        <a href="/post/destroy/<%= p.id %>">Delete</a>
+    <% } %>
+    <div class="content">
+        <%= p.Content %>
+    </div>
+    <div class="username">
+        <%= p.User.Name %>
+    </div>
+</li>

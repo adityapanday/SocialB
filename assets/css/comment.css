@@ -1,0 +1,26 @@
+.comments {
+    margin-top: 10px;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+}
+
+/* Style for each comment */
+.comment {
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Style for the "Delete Comment" link */
+.delete-comment {
+    color: #dc3545;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+/* Style for the user's name in comments */
+.comment-username {
+    font-weight: bold;
+    color: #007bff;
+}

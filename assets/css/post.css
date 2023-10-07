@@ -1,0 +1,26 @@
+li {
+    list-style-type: none;  
+    margin-bottom: 20px;  
+    padding: 10px; 
+    background-color: #fff;  
+    border: 1px solid #ccc; 
+    border-radius: 5px;  
+}
+
+ 
+a {
+    color: #dc3545;  
+    text-decoration: none; 
+    margin-right: 10px;  
+}
+
+ 
+.content {
+    font-size: 16px;  
+    margin-bottom: 10px;  
+}
+
+.username {
+    font-weight: bold;  
+    color: #007bff; 
+}

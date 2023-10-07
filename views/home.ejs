@@ -24,18 +24,15 @@
         <% if (locals.user) { %>
         <% for (p of posts) { %>
         <div>
-            <% if (locals.user.id == p.User.id) { %>
-                <a href="/post/destroy/<%= p.id %>">Delete</a>
-            <% } %>
 
-            <li>
-                <%= p.Content %>
-            </li>
-            <li>
-                <%= p.User.Name %>
-            </li>
+
+
+            <%-include('_post')-%>
+        
+        
+        
         </div>
-        <hr>
+       
         <div>
             <form action="/comment/create" method="post">
                 <input type="text" name="comment" placeholder="Comments">
@@ -44,19 +41,12 @@
             </form>
         </div>
         <div>
-            <% for (c of p.comments) { %>
-            <p>
-                <%= c.comment %>
-            </p>
 
-            <% if (locals.user.id == c.user.id) { %>
-                <a href="/comment/destroy/<%= c.id %>">Delete Comment</a>
-            <% } %>
-            <br>
-            <small>
-                <%= c.user.Name %>
-            </small>
-            <% } %>
+
+          <%-include('_comment')-%>
+
+
+
         </div>
         <% } %>
         <% } %>
