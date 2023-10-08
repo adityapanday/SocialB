@@ -4,8 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
+
+ <style>
+       aside {
+            width: 20%; 
+            position: relative;
+            left: 0;
+            top: 0;
+            height: 100%;
+            background-color: #f0f0f0; 
+            padding: 20px; 
+        }
+        section {
+            margin: 0 auto; /* Center the section horizontally */
+            max-width: 800px; /* Adjust the maximum width as needed */
+            padding: 20px; /* Add some padding for content */
+        }
+ </style>
+
 </head>
 <body>
+
+    <section>
     <div>
         <h1>Welcome to SocialB</h1>
     </div>
@@ -49,7 +69,24 @@
 
         </div>
         <% } %>
-        <% } %>
+      
     </div>
+</section>
+           <!-- aside for Friend List and Edits -->
+
+           <aside>
+
+            <% for(f of allfriend) {%>
+                <p>
+                    <a href="/users/profile/<%=f.id%>"><%=f.Name%></a>
+                </p>
+
+
+            <%}%>
+           </aside>
+
+
+           <% } %>
+
 </body>
 </html>

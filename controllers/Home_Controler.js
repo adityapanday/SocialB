@@ -45,13 +45,13 @@ module.exports.home = async(req , res)=>{
           }
        
          const val2for_User = await User.find({});
-
+        //  const Alluser = await User.find({});
          
      return res.render('home', {
          title: "Codeial | Home",
          posts: val,   
-          
-         User:val2for_User
+        //  allfriend :  Alluser,
+        allfriend:val2for_User
      });
 
 

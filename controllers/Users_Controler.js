@@ -1,8 +1,36 @@
 const User = require('../models/user');
 const passport = require('passport');
-module.exports.profile = (req , res)=>{
-   return res.render('user');
+module.exports.profile = async(req , res)=>{
+ const val = await User.findById(req.params.id);
+
+   
+   return res.render('user' ,
+   {
+    profile_user : val
+   }
+   
+   
+   );
     
+};
+
+//profile edit
+module.exports.update = async (req , res )=>{
+   try {
+    if(req.user.id == req.params.id){
+     const update = await User.findByIdAndUpdate(req.params.id ,   {Email : req.body.Email , Name : req.body.Name});
+     if(!update){
+      console.log("Error in updation ");
+      return res.redirect('back');
+     } 
+     console.log("Suscessfully updated ");
+     return res.redirect('back');
+      }
+   } catch (error) {
+       console.log("catch ma error " + error);
+       return res.status(200);
+   }
+
 };
 
 module.exports.edit = (req , res)=>{
