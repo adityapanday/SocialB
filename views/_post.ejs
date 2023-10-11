@@ -1,13 +1,21 @@
 <link rel="stylesheet" href="/css/post.css">
 
-<li>
+<li id="post_<%=p.id%>">
     <% if (locals.user.id == p.User.id) { %>
-        <a href="/post/destroy/<%= p.id %>">Delete</a>
+        <a href="/post/destroy/<%= p.id %>"  class="common-class-delete"> Delete</a>
     <% } %>
     <div class="content">
         <%= p.Content %>
     </div>
     <div class="username">
         <%= p.User.Name %>
+    </div>
+    
+    <div>
+        <form action="/comment/create" method="post">
+            <input type="text" name="comment" placeholder="Comments">
+            <input type="hidden" name="post" value="<%= p._id %>">
+            <input type="submit" value="Comment">
+        </form>
     </div>
 </li>

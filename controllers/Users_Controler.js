@@ -107,6 +107,16 @@ module.exports.post = async(req , res)=>{
      Content:req.body.Content ,
       User: req.user._id
    });
+   // Checking if the request is an XHR (Ajax) request
+   if (req.xhr) {
+    return res.status(200).json({
+      data: {
+        post: a
+      },
+      message: "Post created"
+    });
+  }
+
    if(a){
      console.log("Posted");
      return  res.redirect('back');
