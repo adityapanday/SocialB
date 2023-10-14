@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="/css/comment.css">
 
-<!-- <li>
+<li>
     <% for (c of p.comments) { %>
         <div class="comments">
             <div class="comment">
@@ -17,21 +17,6 @@
             </small>
         </div>
     <% } %>
-</li> -->
-
-
-<li>
-    <p>
-        <% if (locals.user && locals.user.id == c.user.id){ %>
-        <small>
-            <a href="/comment/destroy/<%= c.id %>"  class="delete-comment">Delete Comment</a>
-        </small>
-        <% } %>
-        <%= c.comment %>
-        <br>
-        <small>
-            <%= c.user.Name %>
-        </small>
-    </p>    
-
 </li>
+
+
