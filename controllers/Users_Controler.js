@@ -15,23 +15,70 @@ module.exports.profile = async(req , res)=>{
 };
 
 //profile edit
-module.exports.update = async (req , res )=>{
-   try {
-    if(req.user.id == req.params.id){
-     const update = await User.findByIdAndUpdate(req.params.id ,   {Email : req.body.Email , Name : req.body.Name});
-     if(!update){
-      console.log("Error in updation ");
-      return res.redirect('back');
-     } 
-     console.log("Suscessfully updated ");
-     return res.redirect('back');
-      }
-   } catch (error) {
-       console.log("catch ma error " + error);
-       return res.status(200);
-   }
+// module.exports.update = async (req , res )=>{
+//    try {
+//     if(req.user.id == req.params.id){
+//     //  const update = await User.findByIdAndUpdate(req.params.id ,   {Email : req.body.Email , Name : req.body.Name});
+//     //  if(!update){
+//     //   console.log("Error in updation ");
+//     //   return res.redirect('back');
+//     //  } 
+//     //  console.log("Suscessfully updated ");
+//     //  return res.redirect('back');
+//      const update = await User.findById(req.params.id);
+//         User.uplodedAvatar(req , res , function(err){
+//           if(err){ console.log("error in multer ******" + err)}
+//           user.Name = req.body.Name ;
+//           user.Email = req.body.Email;
+          
+//           if(req.file){
+//             // console.log(req.file);
+//              user.avatar = User.avatarPath + '/' + req.file.originalname;
+//           }
+//           // user.save();
+//           update.save();
+           
+//           return res.redirect('back');
+//         });
+//       }
+//    } catch (error) {
+//        console.log("catch ma error " + error);
+//        return res.status(200);
+//    }
 
+// };
+
+
+module.exports.update = async function(req, res) {
+  if (req.user.id == req.params.id) {
+      try {
+          let user1 = await User.findById(req.params.id);
+          User.uplodedAvatar(req, res, function(err) {
+              if (err) {
+                  console.log('*****Multer Error: ' + err);
+              }
+
+              user1.Name = req.body.Name;
+              user1.Email = req.body.Email;
+
+              if (req.file) {
+                  user1.avatar = User.avatarPath + '/' + req.file.originalname;
+              }
+
+              user1.save();
+              console.log(req.file);
+              res.redirect('back');
+          });
+      } catch (err) {
+          console.log("error in multer catch: " + err);
+          return res.redirect('back');
+      }
+  } else {
+      console.log("user not defined");
+      return res.status(401).send('Unauthorized');
+  }
 };
+
 
 module.exports.edit = (req , res)=>{
    res.end("user ko edit karna hai ");
@@ -131,6 +178,7 @@ module.exports.post = async(req , res)=>{
 
 //delete post 
 const Comment = require('../models/comment');
+const user = require('../models/user');
 
 
 module.exports.destroy2 = async function (req, res) {
