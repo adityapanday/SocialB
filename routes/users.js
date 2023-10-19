@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Users_controler = require('../controllers/Users_Controler');
 const passport = require('passport');
+ 
 
 
 router.get('/profile/:id',passport.checkAuthentication , Users_controler.profile);

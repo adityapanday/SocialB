@@ -14,10 +14,6 @@ const passportLocal = require('./config/passport-local-strategy');
 // const path = require('path');
 
 app.use(cookieparser());
-// make the uploads path available to the browser
-app.use('/uploads', express.static(__dirname + '/uploads'));
-
-
 
 //form data ka lia 
 app.use(express.urlencoded());
@@ -25,6 +21,9 @@ app.use(express.urlencoded());
 
 // Static files ka lia
 app.use(express.static('./assets'));
+
+// make the uploads path available to the browser
+app.use('/uploads', express.static(__dirname + '/uploads'));
 
 app.use(expressLayouts);
 

@@ -1,5 +1,10 @@
 const User = require('../models/user');
 const passport = require('passport');
+const fs = require('fs');
+const path = require('path');
+
+
+
 module.exports.profile = async(req , res)=>{
  const val = await User.findById(req.params.id);
 
@@ -33,7 +38,7 @@ module.exports.profile = async(req , res)=>{
           
 //           if(req.file){
 //             // console.log(req.file);
-//              user.avatar = User.avatarPath + '/' + req.file.originalname;
+//              update.avatar = User.avatarPath + '/' + req.file.originalname;
 //           }
 //           // user.save();
 //           update.save();
@@ -62,7 +67,13 @@ module.exports.update = async function(req, res) {
               user1.Email = req.body.Email;
 
               if (req.file) {
-                  user1.avatar = User.avatarPath + '/' + req.file.originalname;
+
+
+                //  if(user1.avatar){
+                //   fs.unlinkSync(path.join(__dirname , '..',user1.avatar));
+                //  }
+ 
+                  user1.avatar = User.avatarPath +'/' + req.file.filename;
               }
 
               user1.save();
@@ -78,6 +89,7 @@ module.exports.update = async function(req, res) {
       return res.status(401).send('Unauthorized');
   }
 };
+// data base ma ek bar .. hata kar dakho 
 
 
 module.exports.edit = (req , res)=>{
