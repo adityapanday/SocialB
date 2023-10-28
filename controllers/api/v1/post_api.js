@@ -5,7 +5,7 @@ module.exports.index = async function(req, res) {
     try {
         let posts = await Post.find({})
             .sort('-createdAt')
-            .populate('User')  // Corrected field name from 'User' to 'user'
+            .populate('User') 
             .populate({
                 path: 'comments',
                 populate: {
