@@ -10,6 +10,7 @@ const session = require('express-session');
 const passport = require('passport');
 //aditya change local to google auth at deployment 
 const passportLocal = require('./config/passport-local-strategy');
+const passportJWT = require('./config/passport-jwt-strategy');
 
 // const path = require('path');
 

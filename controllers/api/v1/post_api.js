@@ -25,55 +25,62 @@ module.exports.index = async function(req, res) {
     }
 }
 
-// module.exports.destroy = async function(req, res){
+module.exports.destroy = async function(req, res){
 
-//     try{
-//         let post = await Post.findById(req.params.id);
+    try{
+        let post = await Post.findById(req.params.id);
 
-//         // if (post.user == req.user.id){
-//             post.remove();
+        if (post.User == req.user.id){
+            post.remove();
 
-//             await Comment.deleteMany({post: req.params.id});
+            await Comment.deleteMany({post: req.params.id});
 
 
     
-//             return res.json(200, {
-//                 message: "Post and associated comments deleted successfully!"
-//             });
-//         // }else{
-//         //     req.flash('error', 'You cannot delete this post!');
-//         //     return res.redirect('back');
-//         // }
-
-//     }catch(err){
-//         console.log('********', err);
-//         return res.json(500, {
-//             message: "Internal Server Error"
-//         });
-//     }
-    
-// }
-module.exports.destroy = async function (req, res) {
-    try {
-        // Use findByIdAndDelete to delete the post
-        const post = await Post.findByIdAndDelete(req.params.id);
-
-        if (!post) {
-            return res.status(404).json({
-                message: "Post not found"
+            return res.json(200, {
+                message: "Post and associated comments deleted successfully!"
             });
+        }else{
+      
+            return res.redirect('back');
         }
 
-        // Delete associated comments
-        await Comment.deleteMany({ post: req.params.id });
-
-        return res.status(200).json({
-            message: "Post and associated comments deleted successfully!"
-        });
-    } catch (err) {
+    }catch(err){
         console.log('********', err);
-        return res.status(500).json({
+        return res.json(500, {
             message: "Internal Server Error"
         });
     }
+    
 }
+
+
+
+
+
+// module.exports.destroy = async function (req, res) {
+//     try {
+//         // if (post.user == req.user.id){
+//         // Use findByIdAndDelete to delete the post
+//         const post = await Post.findByIdAndDelete(req.params.id);
+
+//         if (!post) {
+//             return res.status(404).json({
+//                 message: "Post not found"
+//             });
+//         }
+        
+//         // Delete associated comments
+//         await Comment.deleteMany({ post: req.params.id });
+
+//         return res.status(200).json({
+//             message: "Post and associated comments deleted successfully!"
+//         });
+//     // }
+//     } catch (err) {
+//         console.log('********', err);
+//         return res.status(500).json({
+//             message: "Internal Server Error"
+//         });
+//     }
+// }
