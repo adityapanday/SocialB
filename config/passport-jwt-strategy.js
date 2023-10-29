@@ -12,21 +12,22 @@ const  secret1 = 'Aditya';
 const User = require('../models/user');
 var opts = { 
     jwtFromRequest : ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey : secret1
+    secretOrKey :secret1
 }
 
-passport.use(new JWTStrategy(opts, function(jwtPayLoad, done){
 
-    User.findById(jwtPayLoad._id, function(err, user){
-        if (err){console.log('Error in finding user from JWT'); return;}
-
-        if (user){
+passport.use(new JWTStrategy(opts, async (jwtPayload, done) => {
+    try {
+        const user = await User.findById(jwtPayload._id);
+        if (user) {
             return done(null, user);
-        }else{
+        } else {
             return done(null, false);
         }
-    })
-
+    } catch (err) {
+        console.log('Error in finding user from JWT', err);
+        return done(err, false);
+    }
 }));
 
 module.exports = passport;

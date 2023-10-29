@@ -25,34 +25,34 @@ module.exports.index = async function(req, res) {
     }
 }
 
-module.exports.destroy = async function(req, res){
+// module.exports.destroy = async function(req, res){
 
-    try{
-        let post = await Post.findById(req.params.id);
+//     try{
+//         let post = await Post.findById(req.params.id);
 
-        if (post.User == req.user.id){
-            post.remove();
+//         if (post.User == req.user.id){
+//             post.remove();
 
-            await Comment.deleteMany({post: req.params.id});
+//             await Comment.deleteMany({post: req.params.id});
 
 
     
-            return res.json(200, {
-                message: "Post and associated comments deleted successfully!"
-            });
-        }else{
+//             return res.json(200, {
+//                 message: "Post and associated comments deleted successfully!"
+//             });
+//         }else{
       
-            return res.redirect('back');
-        }
+//             return res.redirect('back');
+//         }
 
-    }catch(err){
-        console.log('********', err);
-        return res.json(500, {
-            message: "Internal Server Error"
-        });
-    }
+//     }catch(err){
+//         console.log('********', err);
+//         return res.json(500, {
+//             message: "Internal Server Error"
+//         });
+//     }
     
-}
+// }
 
 
 
@@ -84,3 +84,38 @@ module.exports.destroy = async function(req, res){
 //         });
 //     }
 // }
+
+module.exports.destroy = async function(req, res) {
+    try {
+        let post = await Post.findById(req.params.id);
+
+        console.log('post.user:', post.User); // Log the post user ID
+        console.log('req.user.id:', req.User.id); // Log the authenticated user's ID
+
+        if (!post) {
+            return res.status(404).json({
+                message: "Post not found"
+            });
+        }
+
+        if (post.User.toString() === req.user.id.toString()) {
+            // Ensure that you're using the `toString()` method to compare IDs
+            post.remove();
+
+            await Comment.deleteMany({ post: req.params.id });
+
+            return res.status(200).json({
+                message: "Post and associated comments deleted successfully!"
+            });
+        } else {
+            return res.status(401).json({
+                message: "Unauthorized to delete this post"
+            });
+        }
+    } catch (err) {
+        console.error('Error:', err);
+        return res.status(500).json({
+            message: "Internal Server Error"
+        });
+    }
+}
