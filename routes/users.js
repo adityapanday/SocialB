@@ -25,6 +25,10 @@ router.post('/create-session', passport.authenticate(
 
 
 
+//                                                                              email dakh lena koi error na ho
+router.get('/auth/google', passport.authenticate('google', {scope: ['profile', 'email']}));
+router.get('/auth/google/callback', passport.authenticate('google', {failureRedirect: '/users/signin'}), Users_controler.createSession);
+
 
 
 

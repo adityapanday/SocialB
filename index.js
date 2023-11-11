@@ -1,3 +1,7 @@
+//multer not working and 
+// agar existing user Signup karne ki kosis kar reha hai via Google Auth then error aa reha hia 
+
+
 const express = require ('express');
 const cookieparser = require('cookie-parser');
 const app = express();
@@ -11,6 +15,7 @@ const passport = require('passport');
 //aditya change local to google auth at deployment 
 const passportLocal = require('./config/passport-local-strategy');
 const passportJWT = require('./config/passport-jwt-strategy');
+const passportGoogle = require('./config/passport-oauth2-strategy');
 
 // const path = require('path');
 
